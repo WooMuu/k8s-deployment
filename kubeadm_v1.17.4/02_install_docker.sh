@@ -27,13 +27,6 @@ yum update -y && yum install -y \
   docker-ce-19.03.4 \
   docker-ce-cli-19.03.4
 
-DN= '/etc/docker'
-if [-d $DN];
-   then rm -rf $DN
-else
-   mkdir $DN
-fi
-
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
