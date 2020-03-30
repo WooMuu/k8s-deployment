@@ -14,6 +14,5 @@ yum list installed | grep kube
 
 systemctl enable kubelet && systemctl start kubelet
 
-# Configure cgroup matched with Docker
 systemctl daemon-reload
 systemctl restart kubelet
