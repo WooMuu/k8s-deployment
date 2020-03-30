@@ -26,7 +26,14 @@ systemctl disable firewalld
 # Disable SELinux
 echo "###############################################"
 echo "Disable SELinux"
-# setenforce 0
+
+str1=`/usr/sbin/sestatus -v`
+str2=disabled
+if [ ${str1##* } = $str2 ]
+then echo SElinux had was disabled
+else setenforce 0
+fi
+
 cp -p /etc/selinux/config /etc/selinux/config.bak$(date '+%Y%m%d%H%M%S')
 sed -i "s/SELINUX=enforcing/SELINUX=disabled/g" /etc/selinux/config
 
