@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 # Uninstall installed docker
-sudo yum remove docker \
+sudo yum -y remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -27,7 +27,13 @@ yum update -y && yum install -y \
   docker-ce-19.03.4 \
   docker-ce-cli-19.03.4
 
-mkdir /etc/docker
+DN= '/etc/docker'
+if [-d $DN];
+   then rm -rf $DN
+else
+   mkdir $DN
+fi
+
 cat > /etc/docker/daemon.json <<EOF
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
