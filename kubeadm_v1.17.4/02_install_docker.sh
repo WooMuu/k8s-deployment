@@ -27,11 +27,25 @@ yum update -y && yum install -y \
   docker-ce-19.03.4 \
   docker-ce-cli-19.03.4
 
+mkdir /etc/docker
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ],
+  "registry-mirrors": ["https://5twf62k1.mirror.aliyuncs.com"]
+}
+EOF
+
 systemctl enable docker
 systemctl start docker
-
 docker version
-
 
 # Use Aliyun docker registry
 #./use_aliyun_docker_registry.sh
