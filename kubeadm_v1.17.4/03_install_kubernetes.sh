@@ -7,7 +7,7 @@ set -e
 setenforce 0
 # Use Kubernetes-cni-0.6.0 explictly
 # https://github.com/kubernetes/kubernetes/issues/75701
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum install -y kubelet-1.17.4 kubeadm-1.17.4 kubectl-1.17.4 --disableexcludes=kubernetes
 
 # Check installed Kubernetes packages
 yum list installed | grep kube
