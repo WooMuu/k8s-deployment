@@ -9,11 +9,16 @@ spec:
   env:
     - name: DB_PORT
       value: "6379"
+    - name: duplicate_key
+      value: FROM_ENV
+    - name: expansion
+      value: $(REPLACE_ME)
+  envFrom:
+    - configMapRef:
+        name: etcd-env-config
   volumeMounts:
     - mountPath: /cache
       name: cache-volume
   volumes:
     - name: cache-volume
       emptyDir: {}
-#需要启用PodPreset, 1. 修改/etc/kubernetes/manifests/kube-apiserver.yaml文件，添加--enable-admission-plugins=NodeRestriction,PodPreset 和--runtime-config=settings.k8s.io/v1alpha1=true ，
-#2. 重启kubelet: systemctl restart kubelet
