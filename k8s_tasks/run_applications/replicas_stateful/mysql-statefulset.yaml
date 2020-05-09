@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: mysql
   serviceName: mysql
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
@@ -78,7 +78,7 @@ spec:
               mountPath: /etc/mysql/conf.d
           resources:
             requests:
-              cpu: 500m
+              cpu: 50m
               memory: 1Gi
           livenessProbe:
             exec:
@@ -148,8 +148,8 @@ spec:
               mountPath: /etc/mysql/conf.d
           resources:
             requests:
-              cpu: 100m
-              memory: 100Mi
+              cpu: 10m
+              memory: 10Mi
       volumes:
         - name: conf
           emptyDir: {}
