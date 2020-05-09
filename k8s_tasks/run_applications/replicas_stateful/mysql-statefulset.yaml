@@ -160,9 +160,7 @@ spec:
     - metadata:
         name: data
       spec:
-        storageClassName: manual
-        accessModes:
-          - ReadWriteOnce
+        accessModes: ["ReadWriteOnce"]
         resources:
           requests:
             storage: 2Gi
