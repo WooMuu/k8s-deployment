@@ -6,7 +6,6 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
   name: docker-registry
-  namespace: docker-registry
 spec:
   rules:
     - host: test.com
