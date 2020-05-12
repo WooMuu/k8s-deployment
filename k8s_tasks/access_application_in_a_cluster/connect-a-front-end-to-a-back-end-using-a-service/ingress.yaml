@@ -2,10 +2,8 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-  name: docker-registry
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: test-ingress
 spec:
   rules:
     - host: test.com
