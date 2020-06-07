@@ -20,7 +20,8 @@ set -e
 
 
 # Join kubernetes node
-kubeadm join 192.168.254.130:6443 --token 4hyct1.928x1jojwzda0be2     --discovery-token-ca-cert-hash sha256:8a9d116ced1259ccbba987018d25ad364500a36ec1fffa3650d9103f09aa7e47
+kubeadm join 192.168.254.130:6443 --token 2n163h.tgtx6vebz7igzwlx \
+    --discovery-token-ca-cert-hash sha256:c3931908257521ae51145c17fdb5062168d8b47fb0123ef11be95ebe4779443d
 # Put "kubeadm join" here from "kubeadm init" output
 # Example: kubeadm join 192.168.37.101:6443 --token mmxy0q.sjqca7zrzzj7czft --discovery-token-ca-cert-hash sha256:099421bf9b3c58e4e041e816ba6477477474614a17eca7f5d240eb733e7476bb	
 
