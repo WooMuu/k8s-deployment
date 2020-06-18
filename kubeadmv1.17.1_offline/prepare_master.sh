@@ -2,7 +2,7 @@
 set -e
 
 mkdir /root/k8sOfflineSetup
-tar -xzvf /root/k8sOfflineSetup.tar.gz -C /root/k8sOfflineSetup
+tar -xzvf k8sOfflineSetup.tar.gz -C /root/k8sOfflineSetup
 # master节点的主机名
 export HOSTNAME=k8s-master
 # kubernetes apiserver的主机地址
