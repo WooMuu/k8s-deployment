@@ -44,7 +44,7 @@ export HOSTNAME=k8s-master
 # kubernetes apiserver的主机地址
 export APISERVER_NAME=apiserver.k8s.com
 # 集群中master节点的ip地址
-export MASTER_IP=192.168.1.30
+export MASTER_IP=192.168.65.106
 # Pod 使用的网段
 export POD_SUBNET=10.11.10.0/16
 
@@ -67,15 +67,16 @@ kubeadm token create --print-join-command
 
 ```bash
 # worker节点的主机名
-export HOSTNAME=k8s-worker2
+export HOSTNAME=k8s-worker1
 # kubernetes apiserver的主机地址
 export APISERVER_NAME=apiserver.k8s.com
 # 集群中master节点的ip地址
-export MASTER_IP=192.168.1.30
+export MASTER_IP=192.168.60.69
+export APISERVER_PORT=6443
 # 加入master的token
-export TOKEN=35jn30.4ru763yqfvp4j89m
+export TOKEN=j1exay.oirbgo7ytkulaay8
 # 加入master的证书
-export CERT=sha256:4c720c8dbf3f91a542ee892188108f99ff80ba1025099a8210145917b1f13a13
+export CERT=sha256:279d69a2a5e87d397689f886e5ddc4bec4a08ab092a6455729efc510212ce5d4
 cd /root/k8sOfflineSetup
 ./setup_worker.sh
 ```

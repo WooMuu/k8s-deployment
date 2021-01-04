@@ -8,4 +8,5 @@ mkdir /home/jenkins
 ls -nd /home/jenkins
 #给uid为1000的权限
 chown -R 1000:1000 /home/jenkins
-docker run --name jenkins -p 8080:8080 -p 50000:50000 -v /home/jenkins:/var/jenkins_home jenkins/jenkins:latest
+docker run -d --name jenkins --restart always -p 8086:8080 -p 50000:50000 -v /home/jenkins:/var/jenkins_home jenkins/jenkins:latest
+#用户名 ticp 密码 ticp
