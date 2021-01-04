@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-zuul
+  namespace: springcloud-demo
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /zuulsvr
+            backend:
+              serviceName: zuulsvr
+              servicePort: 5555
+          - path: /eureka
+            backend:
+              serviceName: eureka
+              servicePort: 8761
