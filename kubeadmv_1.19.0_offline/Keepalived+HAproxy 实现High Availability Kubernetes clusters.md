@@ -1,6 +1,6 @@
 ﻿
 
-## 来自于我的CSDN https://blog.csdn.net/m0_37806791/article/details/112234276
+## Keepalived+HAproxy 实现High Availability Kubernetes clusters
 
  - # 网络拓扑
  
@@ -12,7 +12,7 @@ HAproxy+keepalive+Kubeadm安装Kubernetes master
 |k8s-master01|192.168.254.3|Kubernetes master/etcd,keepalive(主)，HAproxy|
 |k8s-master02|192.168.254.4|Kubernetes master/etcd,keepalive(主)，HAproxy|
 |k8s-master03|192.168.254.5|Kubernetes master/etcd,keepalive(主)，HAproxy|
-|  /| 192.168.254.8 | VIP(虚拟IP) |
+|cluster.kube.com| 192.168.254.8 | VIP(虚拟IP) |
 
 ## 系统初始化
  1. 添加host解析
@@ -22,7 +22,7 @@ cat >> /etc/hosts<<EOF
 192.168.254.3  k8s-master01
 192.168.254.4  k8s-master02
 192.168.254.5  k8s-master03
-192.168.254.8   cluster.kube.com
+192.168.254.100   cluster.kube.com
 EOF
 
 hostnamectl set-hostname k8s-master01 //永久修改hostname
@@ -71,13 +71,13 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@k8s-master03
 ```bash
 yum -y install epel-re*
 yum -y install keepalived.x86_64
-#设置环境变量
+#占位符提示
 #STATE=master
 #INTERFACE=ens33
 #ROUTER_ID=51
 #PRIORITY=150
-#AUTH_PASS=ticp
-#APISERVER_VIP=192.168.254.8
+#AUTH_PASS=1111
+#APISERVER_VIP=192.168.254.100
 #把占位字母换成上面的变量
 cat > /etc/keepalived/keepalived.conf << EOF
 ! Configuration File for keepalived
@@ -116,8 +116,8 @@ systemctl enable keepalived.service && systemctl start keepalived.service
 
 ```bash
 #占位符示例
-#APISERVER_DEST_PORT=6443
-#APISERVER_VIP=192.168.254.8
+#APISERVER_DEST_PORT=16443
+#APISERVER_VIP=192.168.254.100
 #把占位字母换成上面的变量
 cat > /etc/keepalived/check_apiserver.sh<<-'EOF'
 #!/bin/sh
@@ -181,7 +181,7 @@ defaults
 
 #---------------------------------------------------------------------# apiserver frontend which proxys to the masters#---------------------------------------------------------------------
 frontend apiserver
-    bind *:6443
+    bind *:16443
     mode tcp
     option tcplog
     default_backend apiserver
@@ -204,5 +204,4 @@ systemctl start haproxy.service  && systemctl enable haproxy.service
 
 安装k8s
 略...
-
 

@@ -77,28 +77,17 @@ echo "${MASTER_IP}    ${APISERVER_NAME}" >> /etc/hosts
 5. 在主节点为从节点设置角色
 
 ```bash
-kubectl label nodes k8s-workder1 node-role.kubernetes.io/node=
+kubectl label nodes k8s-worker1 node-role.kubernetes.io/node=
 ```
 
 ## 验证：
-到这里k8s多主多从集群已经安装好了，执行下面的命令查看集群的节点状态：
+到这里k8s一主多从集群已经安装好了，执行下面的命令查看集群的节点状态：
 
 ```bash
 kubectl get nodes
 ```
-
-正常情况下：
-
-```bash
-root@k8s-master02 k8sOfflineSetup]# kubectl get node
-NAME           STATUS   ROLES    AGE     VERSION
-k8s-master01   Ready    master   29h     v1.19.0
-k8s-master02   Ready    master   28h     v1.19.0
-k8s-master03   Ready    master   28h     v1.19.0
-k8s-worker1    Ready    node     2m54s   v1.19.0
-
-```
-
+正常情况下，
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200618175206688.png)
 如果有点节点的status状态不是Ready,移步
 [k8s官方文档的troubleshooting](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/)
 [Minikube不能启动的原因](https://editor.csdn.net/md/?articleId=104900429)
