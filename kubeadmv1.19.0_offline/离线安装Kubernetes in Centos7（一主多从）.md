@@ -37,12 +37,11 @@ tar -xzvf k8sOfflineSetup.tar.gz -C /root/k8sOfflineSetup
  
 
 ```bash
-
-```bash
 # master节点的主机名
 export HOSTNAME=k8s-master
 # kubernetes apiserver的主机地址
 export APISERVER_NAME=apiserver.k8s.com
+export APISERVER_DEST_PORT=6443
 # 集群中master节点的ip地址
 export MASTER_IP=192.168.65.106
 # Pod 使用的网段
@@ -72,7 +71,7 @@ export HOSTNAME=k8s-worker1
 export APISERVER_NAME=apiserver.k8s.com
 # 集群中master节点的ip地址
 export MASTER_IP=192.168.60.69
-export APISERVER_PORT=6443
+export APISERVER_DEST_PORT=6443
 # 加入master的token
 export TOKEN=j1exay.oirbgo7ytkulaay8
 # 加入master的证书
