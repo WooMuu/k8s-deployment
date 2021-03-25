@@ -8,7 +8,7 @@ k8s官网安装：[k8s install](https://kubernetes.io/docs/setup/production-envi
 
  - CentOS Linux release 7.7.1908 (Core)
  - Docker 19.03.5
- - Kubernetes 1.19.0
+ - Kubernetes 1.17.1
  - Master节点 192.168.254.133
  - Worker节点 192.168.254.135
 
@@ -23,27 +23,29 @@ cat /etc/redhat-release
  1. 根据k8s官网的安装文档，在安装k8s之前，需要对系统做一些调整。我已经写了一个完成脚本，放在github上：[pre-check](https://github.com/FillixZhangJB/k8s-deployment/blob/master/kubeadmv1.17.1_offline/01_pre_check_and_configure.sh)
 需要在每台机器上执行。
  2.  将离线资源包复制到每个节点的/root目录下
+ 3. 在**每个** 节点上执行：
 
-## 安装master
-在***master***节点上执行。
-
- 1. 解压到/root/k8sOfflineSetup目录
+  解压到/root/k8sOfflineSetup目录
  ```bash
 mkdir /root/k8sOfflineSetup
 tar -xzvf k8sOfflineSetup.tar.gz -C /root/k8sOfflineSetup 
 ```
 ⚠️注意：解压路径不能修改。
- 2. 设置参数并安装
+## 安装master
+
+
+ 1. 设置参数并初始化master节点
  
+
+```bash
 
 ```bash
 # master节点的主机名
 export HOSTNAME=k8s-master
 # kubernetes apiserver的主机地址
 export APISERVER_NAME=apiserver.k8s.com
-export APISERVER_DEST_PORT=6443
 # 集群中master节点的ip地址
-export MASTER_IP=192.168.65.106
+export MASTER_IP=192.168.1.30
 # Pod 使用的网段
 export POD_SUBNET=10.11.10.0/16
 
@@ -66,16 +68,15 @@ kubeadm token create --print-join-command
 
 ```bash
 # worker节点的主机名
-export HOSTNAME=k8s-worker1
+export HOSTNAME=k8s-worker2
 # kubernetes apiserver的主机地址
 export APISERVER_NAME=apiserver.k8s.com
 # 集群中master节点的ip地址
-export MASTER_IP=192.168.60.69
-export APISERVER_DEST_PORT=6443
+export MASTER_IP=192.168.1.30
 # 加入master的token
-export TOKEN=j1exay.oirbgo7ytkulaay8
+export TOKEN=35jn30.4ru763yqfvp4j89m
 # 加入master的证书
-export CERT=sha256:279d69a2a5e87d397689f886e5ddc4bec4a08ab092a6455729efc510212ce5d4
+export CERT=sha256:4c720c8dbf3f91a542ee892188108f99ff80ba1025099a8210145917b1f13a13
 cd /root/k8sOfflineSetup
 ./setup_worker.sh
 ```
